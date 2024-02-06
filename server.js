@@ -1,13 +1,16 @@
+import 'express-async-errors';
 import express from 'express';
 import morgan from 'morgan';
 import * as dotenv from 'dotenv';
 import jobRouter from './routers/jobRouter.js';
 import mongoose from 'mongoose';
+import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
 const app = express();
 
 dotenv.config();
 app.use(express.json());
+app.use(errorHandlerMiddleware);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
